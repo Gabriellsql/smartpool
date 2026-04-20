@@ -50,6 +50,7 @@ body{
     display:inline-block;
     transform:translateY(20px);
     animation:fadeUp 0.5s forwards;
+    margin-right:2px; /* 🔥 pequeño espacio extra */
 }
 
 /* SUBTITULO */
@@ -114,13 +115,17 @@ Tu piscina nunca volverá a ser la misma 💧
 
 <script>
 // TEXTO PRINCIPAL
-const mensaje = "Tu  alberca, siempre  perfecta";
+const mensaje = "Tu alberca, siempre perfecta";
 const contenedor = document.getElementById("texto");
 
 mensaje.split("").forEach((letra, i) => {
     const span = document.createElement("span");
-    span.textContent = letra;
+
+    // 🔥 SOLUCIÓN A LOS ESPACIOS
+    span.innerHTML = (letra === " ") ? "&nbsp;" : letra;
+
     span.style.animationDelay = (i * 0.08) + "s";
+
     contenedor.appendChild(span);
 });
 </script>
