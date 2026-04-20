@@ -28,7 +28,6 @@ body{
     align-items:center;
     text-align:center;
     color:white;
-    position:relative;
 
     background:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
@@ -44,13 +43,11 @@ body{
     max-width:800px;
 }
 
-/* LETRAS */
 .title span{
     opacity:0;
     display:inline-block;
     transform:translateY(20px);
     animation:fadeUp 0.5s forwards;
-    margin-right:2px; /* 🔥 pequeño espacio extra */
 }
 
 /* SUBTITULO */
@@ -58,7 +55,6 @@ body{
     margin-top:20px;
     font-size:1.2rem;
     opacity:0;
-    transform:translateY(20px);
     animation:fadeUp 1s forwards;
     animation-delay:2s;
 }
@@ -71,17 +67,45 @@ body{
     transform:translateY(50px);
     animation:fadeUp 1s forwards;
     animation-delay:3s;
+    transition:0.3s;
 }
 
-/* SECCIÓN SIGUIENTE */
-.next{
-    height:100vh;
-    background:#f4f8fb;
+/* APPLE SCROLL */
+.apple{
+    height:200vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:2rem;
-    color:#0a2540;
+}
+
+.phone-big{
+    width:300px;
+    position:sticky;
+    top:100px;
+}
+
+/* BENEFICIOS */
+.features{
+    padding:100px 40px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    background:#f4f8fb;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    transform:translateY(50px);
+    opacity:0;
+    transition:0.6s;
+}
+
+.card.show{
+    transform:translateY(0);
+    opacity:1;
 }
 
 /* ANIMACIONES */
@@ -96,6 +120,7 @@ body{
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
 
 <h1 class="title" id="texto"></h1>
@@ -104,29 +129,52 @@ body{
 Monitorea pH y cloro en tiempo real desde tu celular
 </p>
 
-<!-- CAMBIA ESTA IMAGEN POR TU APP -->
 <img class="phone" src="https://i.imgur.com/2yaf2wb.png">
 
 </section>
 
-<section class="next">
-Tu piscina nunca volverá a ser la misma 💧
+<!-- SCROLL -->
+<section class="apple">
+<img src="https://i.imgur.com/2yaf2wb.png" class="phone-big" id="phone">
+</section>
+
+<!-- BENEFICIOS -->
+<section class="features">
+<div class="card">Monitoreo en tiempo real</div>
+<div class="card">Inteligencia automática</div>
+<div class="card">Historial de datos</div>
+<div class="card">Ahorro en químicos</div>
 </section>
 
 <script>
-// TEXTO PRINCIPAL
+// TEXTO ANIMADO
 const mensaje = "Tu alberca, siempre perfecta";
 const contenedor = document.getElementById("texto");
 
 mensaje.split("").forEach((letra, i) => {
     const span = document.createElement("span");
-
-    // 🔥 SOLUCIÓN A LOS ESPACIOS
-    span.innerHTML = (letra === " ") ? "&nbsp;" : letra;
-
+    span.innerHTML = letra === " " ? "&nbsp;" : letra;
     span.style.animationDelay = (i * 0.08) + "s";
-
     contenedor.appendChild(span);
+});
+
+// SCROLL
+window.addEventListener("scroll", () => {
+    let scroll = window.scrollY;
+    let phone = document.getElementById("phone");
+    phone.style.transform = `scale(${1 + scroll/2000})`;
+});
+
+// ANIMACIÓN TARJETAS
+const cards = document.querySelectorAll('.card');
+
+window.addEventListener('scroll', () => {
+    cards.forEach(card => {
+        let pos = card.getBoundingClientRect().top;
+        if(pos < window.innerHeight - 100){
+            card.classList.add('show');
+        }
+    });
 });
 </script>
 
