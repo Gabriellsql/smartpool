@@ -28,16 +28,14 @@ body{
     text-align:center;
 
     background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
     url('fondo2.jpg') no-repeat center center fixed;
 
     background-size:cover;
 }
 
-/* TEXTO PRINCIPAL */
 .text{
     font-size:3rem;
-    max-width:800px;
 }
 
 .text span{
@@ -45,101 +43,294 @@ body{
     display:inline-block;
     transform:translateY(20px);
     animation:fadeUp 0.5s forwards;
-    margin-right:2px;
 }
 
-/* SUBTÍTULO */
 .subtitle{
     margin-top:20px;
     font-size:1.2rem;
     opacity:0;
-    transform:translateY(20px);
     animation:fadeUp 1s forwards;
     animation-delay:2.5s;
 }
 
-/* INDICADOR SCROLL */
-.scroll-indicator{
-    position:absolute;
-    bottom:30px;
-    font-size:0.9rem;
+.problem-hero{
+    margin-top:20px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
     opacity:0;
     animation:fadeUp 1s forwards;
-    animation-delay:3.5s;
+    animation-delay:3s;
 }
 
-/* SECCIÓN SIGUIENTE */
-.next{
-    height:100vh;
+.problem-hero div{
+    background:rgba(255,255,255,0.1);
+    padding:8px 12px;
+    border-radius:10px;
+}
+
+.solution-hero{
+    margin-top:20px;
+    font-weight:bold;
+    color:#00e0ff;
+    opacity:0;
+    animation:fadeUp 1s forwards;
+    animation-delay:4s;
+}
+
+/* BENEFICIOS */
+.features{
     display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:80px;
+    padding:100px 60px;
+    background:#f4f8fb;
+    flex-wrap:wrap;
+}
+
+.features-img{
+    width:260px;
+    margin-left:40px;
+    animation:pulse 2s infinite;
+}
+
+.features-content{
+    max-width:520px;
+}
+
+.features-title{
+    font-size:2.5rem;
+    margin-bottom:30px;
+    color:#0a2540;
+}
+
+.features-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.feature-btn{
+    position:relative;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:white;
+    cursor:pointer;
+    text-align:left;
+    transition:0.3s;
+}
+
+.feature-btn::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:5px;
+    height:100%;
+    background:#00e0ff;
+}
+
+.feature-title{
+    font-weight:bold;
+}
+
+.feature-desc{
+    font-size:0.85rem;
+    color:#555;
+}
+
+.feature-btn:hover{
+    transform:scale(1.05);
+    background:#0a2540;
+    color:white;
+}
+
+.feature-btn:hover .feature-desc{
+    color:#ccc;
+}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display:none;
     justify-content:center;
     align-items:center;
-    font-size:2rem;
+}
+
+.modal-content{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    max-width:420px;
+    text-align:left;
+}
+
+/* STATS */
+.stats{
+    display:flex;
+    justify-content:space-between;
+    margin-top:15px;
+}
+
+.stat{
     background:#f4f8fb;
-    color:#0a2540;
-    opacity:0;
-    transform:translateY(50px);
-    transition:1s;
+    padding:10px;
+    border-radius:10px;
+    font-size:0.85rem;
 }
 
-.next.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* ANIMACIÓN */
+/* ANIMACIONES */
 @keyframes fadeUp{
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
-
 <h1 class="text" id="texto"></h1>
 
-<p class="subtitle">
-Monitorea tu alberca en tiempo real sin complicaciones
-</p>
+<p class="subtitle">Control inteligente del agua sin esfuerzo</p>
 
-<div class="scroll-indicator">
-Desliza hacia abajo
+<div class="problem-hero">
+<div>Agua turbia</div>
+<div>Gasto excesivo</div>
+<div>No sabes cuándo limpiar</div>
 </div>
 
+<div class="solution-hero">
+SmartPool lo soluciona automáticamente
+</div>
 </section>
 
-<!-- SIGUIENTE SECCIÓN -->
-<section class="next" id="next">
-Control total del agua desde tu celular
+<section class="features">
+
+<img src="fondo.jpg" class="features-img">
+
+<div class="features-content">
+<h2 class="features-title">Beneficios</h2>
+
+<div class="features-grid">
+
+<button class="feature-btn" onclick="abrirModal('monitoreo')">
+<div class="feature-title">Monitoreo</div>
+<div class="feature-desc">Ej: revisa tu alberca desde tu celular</div>
+</button>
+
+<button class="feature-btn" onclick="abrirModal('ia')">
+<div class="feature-title">IA</div>
+<div class="feature-desc">Ej: recomendaciones automáticas</div>
+</button>
+
+<button class="feature-btn" onclick="abrirModal('ahorro')">
+<div class="feature-title">Ahorro</div>
+<div class="feature-desc">Ej: menos químicos</div>
+</button>
+
+<button class="feature-btn" onclick="abrirModal('historial')">
+<div class="feature-title">Historial</div>
+<div class="feature-desc">Ej: análisis de datos</div>
+</button>
+
+</div>
+</div>
 </section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<h2 id="titulo"></h2>
+<p id="contenido"></p>
+
+<div class="stats" id="stats"></div>
+
+<br>
+<button onclick="cerrarModal()">Cerrar</button>
+</div>
+</div>
 
 <script>
-// TEXTO ANIMADO
-const mensaje = "Tu alberca, siempre perfecta";
-const contenedor = document.getElementById("texto");
+// TEXTO
+const mensaje="Tu alberca, siempre perfecta";
+const contenedor=document.getElementById("texto");
 
-mensaje.split("").forEach((letra, i) => {
-    const span = document.createElement("span");
-    span.innerHTML = letra === " " ? "&nbsp;" : letra;
-    span.style.animationDelay = (i * 0.08) + "s";
-    contenedor.appendChild(span);
+mensaje.split("").forEach((l,i)=>{
+ let span=document.createElement("span");
+ span.innerHTML=l===" "?"&nbsp;":l;
+ span.style.animationDelay=i*0.08+"s";
+ contenedor.appendChild(span);
 });
 
-// TRANSICIÓN AL HACER SCROLL
-window.addEventListener("scroll", () => {
-    const next = document.getElementById("next");
-    const pos = next.getBoundingClientRect().top;
+// MODAL DATA
+function abrirModal(tipo){
+ let titulo=document.getElementById("titulo");
+ let contenido=document.getElementById("contenido");
+ let stats=document.getElementById("stats");
 
-    if(pos < window.innerHeight - 100){
-        next.classList.add("show");
-    }
-});
+ if(tipo==="monitoreo"){
+  titulo.innerText="Monitoreo en tiempo real";
+  contenido.innerText="Un usuario detectó que el pH bajó a 6.8 desde su celular y corrigió antes de que el agua se dañara.";
+  stats.innerHTML=`
+   <div class="stat">pH: 7.2</div>
+   <div class="stat">Cloro: 1.5</div>
+   <div class="stat">Estado: Óptimo</div>
+  `;
+ }
+
+ if(tipo==="ia"){
+  titulo.innerText="Inteligencia Artificial";
+  contenido.innerText="El sistema detecta desequilibrios y recomienda automáticamente agregar químicos.";
+  stats.innerHTML=`
+   <div class="stat">Alerta: Cloro bajo</div>
+   <div class="stat">Acción: +Cloro</div>
+   <div class="stat">Tiempo: 5 min</div>
+  `;
+ }
+
+ if(tipo==="ahorro"){
+  titulo.innerText="Ahorro";
+  contenido.innerText="Usuarios reducen hasta un 30% el gasto en químicos gracias a ajustes precisos.";
+  stats.innerHTML=`
+   <div class="stat">Antes: $500</div>
+   <div class="stat">Ahora: $350</div>
+   <div class="stat">Ahorro: 30%</div>
+  `;
+ }
+
+ if(tipo==="historial"){
+  titulo.innerText="Historial inteligente";
+  contenido.innerText="El sistema analiza patrones y mejora el mantenimiento con el tiempo.";
+  stats.innerHTML=`
+   <div class="stat">Semana 1: 6.9</div>
+   <div class="stat">Semana 2: 7.1</div>
+   <div class="stat">Mejora: +15%</div>
+  `;
+ }
+
+ document.getElementById("modal").style.display="flex";
+}
+
+function cerrarModal(){
+ document.getElementById("modal").style.display="none";
+}
 </script>
 
 </body>
