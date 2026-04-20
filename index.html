@@ -14,14 +14,19 @@
 }
 
 body{
+    overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
     height:100vh;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
     color:white;
     text-align:center;
 
-    /* FONDO PROFESIONAL */
     background:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
     url('fondo2.jpg') no-repeat center center fixed;
@@ -29,19 +34,57 @@ body{
     background-size:cover;
 }
 
-/* TEXTO */
+/* TEXTO PRINCIPAL */
 .text{
     font-size:3rem;
     max-width:800px;
 }
 
-/* LETRAS */
 .text span{
     opacity:0;
     display:inline-block;
     transform:translateY(20px);
     animation:fadeUp 0.5s forwards;
-    margin-right:2px; /* 🔥 separación extra */
+    margin-right:2px;
+}
+
+/* SUBTÍTULO */
+.subtitle{
+    margin-top:20px;
+    font-size:1.2rem;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp 1s forwards;
+    animation-delay:2.5s;
+}
+
+/* INDICADOR SCROLL */
+.scroll-indicator{
+    position:absolute;
+    bottom:30px;
+    font-size:0.9rem;
+    opacity:0;
+    animation:fadeUp 1s forwards;
+    animation-delay:3.5s;
+}
+
+/* SECCIÓN SIGUIENTE */
+.next{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2rem;
+    background:#f4f8fb;
+    color:#0a2540;
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.next.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* ANIMACIÓN */
@@ -56,23 +99,46 @@ body{
 
 <body>
 
+<!-- HERO -->
+<section class="hero">
+
 <h1 class="text" id="texto"></h1>
 
+<p class="subtitle">
+Monitorea tu alberca en tiempo real sin complicaciones
+</p>
+
+<div class="scroll-indicator">
+Desliza hacia abajo
+</div>
+
+</section>
+
+<!-- SIGUIENTE SECCIÓN -->
+<section class="next" id="next">
+Control total del agua desde tu celular
+</section>
+
 <script>
-// TEXTO
+// TEXTO ANIMADO
 const mensaje = "Tu alberca, siempre perfecta";
 const contenedor = document.getElementById("texto");
 
-// ANIMACIÓN LETRA POR LETRA CON ESPACIOS CORRECTOS
 mensaje.split("").forEach((letra, i) => {
     const span = document.createElement("span");
-
-    // 🔥 AQUÍ LA CLAVE
-    span.innerHTML = (letra === " ") ? "&nbsp;" : letra;
-
+    span.innerHTML = letra === " " ? "&nbsp;" : letra;
     span.style.animationDelay = (i * 0.08) + "s";
-
     contenedor.appendChild(span);
+});
+
+// TRANSICIÓN AL HACER SCROLL
+window.addEventListener("scroll", () => {
+    const next = document.getElementById("next");
+    const pos = next.getBoundingClientRect().top;
+
+    if(pos < window.innerHeight - 100){
+        next.classList.add("show");
+    }
 });
 </script>
 
