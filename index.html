@@ -79,7 +79,7 @@ body{
     animation-delay:4s;
 }
 
-/* BENEFICIOS */
+/* WHY / BENEFICIOS */
 .features{
     display:flex;
     align-items:center;
@@ -102,8 +102,13 @@ body{
 
 .features-title{
     font-size:2.5rem;
-    margin-bottom:30px;
+    margin-bottom:10px;
     color:#0a2540;
+}
+
+.features-sub{
+    margin-bottom:30px;
+    color:#555;
 }
 
 .features-grid{
@@ -142,13 +147,19 @@ body{
     color:#555;
 }
 
+.feature-example{
+    font-size:0.8rem;
+    color:#888;
+}
+
 .feature-btn:hover{
     transform:scale(1.05);
     background:#0a2540;
     color:white;
 }
 
-.feature-btn:hover .feature-desc{
+.feature-btn:hover .feature-desc,
+.feature-btn:hover .feature-example{
     color:#ccc;
 }
 
@@ -170,10 +181,8 @@ body{
     padding:30px;
     border-radius:20px;
     max-width:420px;
-    text-align:left;
 }
 
-/* STATS */
 .stats{
     display:flex;
     justify-content:space-between;
@@ -184,7 +193,62 @@ body{
     background:#f4f8fb;
     padding:10px;
     border-radius:10px;
-    font-size:0.85rem;
+}
+
+/* SOLUCIONES */
+.solutions{
+    padding:100px 40px;
+    text-align:center;
+    background:white;
+}
+
+.solutions-title{
+    font-size:2.5rem;
+    color:#0a2540;
+    opacity:0;
+    transform:translateY(30px);
+    transition:0.8s;
+}
+
+.solutions-sub{
+    max-width:700px;
+    margin:20px auto 40px;
+    color:#555;
+    opacity:0;
+    transform:translateY(30px);
+    transition:0.8s;
+}
+
+.solutions-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.solution-card{
+    background:#f4f8fb;
+    padding:25px;
+    border-radius:15px;
+    transition:0.3s;
+    opacity:0;
+    transform:translateY(40px);
+}
+
+.solution-card:hover{
+    transform:scale(1.05);
+    background:#0a2540;
+    color:white;
+}
+
+.solutions.show .solutions-title,
+.solutions.show .solutions-sub{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.solutions.show .solution-card{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* ANIMACIONES */
@@ -205,6 +269,7 @@ body{
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
 <h1 class="text" id="texto"></h1>
 
@@ -221,37 +286,80 @@ SmartPool lo soluciona automáticamente
 </div>
 </section>
 
+<!-- BENEFICIOS -->
 <section class="features">
 
 <img src="fondo.jpg" class="features-img">
 
 <div class="features-content">
-<h2 class="features-title">Beneficios</h2>
+
+<h2 class="features-title">¿Por qué elegir SmartPool?</h2>
+<p class="features-sub">Porque no solo monitorea tu alberca, la mantiene perfecta por ti.</p>
 
 <div class="features-grid">
 
 <button class="feature-btn" onclick="abrirModal('monitoreo')">
 <div class="feature-title">Monitoreo</div>
-<div class="feature-desc">Ej: revisa tu alberca desde tu celular</div>
+<div class="feature-desc">Datos en tiempo real</div>
+<div class="feature-example">Ej: revisa el pH sin estar en casa</div>
 </button>
 
 <button class="feature-btn" onclick="abrirModal('ia')">
 <div class="feature-title">IA</div>
-<div class="feature-desc">Ej: recomendaciones automáticas</div>
+<div class="feature-desc">Automatización inteligente</div>
+<div class="feature-example">Ej: te dice cuándo agregar cloro</div>
 </button>
 
 <button class="feature-btn" onclick="abrirModal('ahorro')">
 <div class="feature-title">Ahorro</div>
-<div class="feature-desc">Ej: menos químicos</div>
+<div class="feature-desc">Reduce gastos</div>
+<div class="feature-example">Ej: usas menos químicos al mes</div>
 </button>
 
 <button class="feature-btn" onclick="abrirModal('historial')">
 <div class="feature-title">Historial</div>
-<div class="feature-desc">Ej: análisis de datos</div>
+<div class="feature-desc">Análisis continuo</div>
+<div class="feature-example">Ej: detecta patrones del agua</div>
 </button>
 
 </div>
 </div>
+</section>
+
+<!-- SOLUCIONES -->
+<section class="solutions" id="solutions">
+
+<h2 class="solutions-title">Soluciones SmartPool</h2>
+
+<p class="solutions-sub">
+Ofrecemos soluciones completas para el cuidado y mantenimiento de piscinas,
+combinando tecnología e inteligencia para mantener el agua perfecta.
+</p>
+
+<div class="solutions-grid">
+
+<div class="solution-card">
+<h3>Sensores inteligentes</h3>
+<p>Dispositivos que miden pH y cloro automáticamente.</p>
+</div>
+
+<div class="solution-card">
+<h3>App en tiempo real</h3>
+<p>Visualiza todo desde tu celular en cualquier momento.</p>
+</div>
+
+<div class="solution-card">
+<h3>Alertas automáticas</h3>
+<p>Recibe notificaciones cuando algo no esté bien.</p>
+</div>
+
+<div class="solution-card">
+<h3>Análisis predictivo</h3>
+<p>Previene problemas antes de que aparezcan.</p>
+</div>
+
+</div>
+
 </section>
 
 <!-- MODAL -->
@@ -259,16 +367,14 @@ SmartPool lo soluciona automáticamente
 <div class="modal-content">
 <h2 id="titulo"></h2>
 <p id="contenido"></p>
-
 <div class="stats" id="stats"></div>
-
 <br>
 <button onclick="cerrarModal()">Cerrar</button>
 </div>
 </div>
 
 <script>
-// TEXTO
+// TEXTO ANIMADO
 const mensaje="Tu alberca, siempre perfecta";
 const contenedor=document.getElementById("texto");
 
@@ -279,7 +385,7 @@ mensaje.split("").forEach((l,i)=>{
  contenedor.appendChild(span);
 });
 
-// MODAL DATA
+// MODAL
 function abrirModal(tipo){
  let titulo=document.getElementById("titulo");
  let contenido=document.getElementById("contenido");
@@ -331,6 +437,14 @@ function abrirModal(tipo){
 function cerrarModal(){
  document.getElementById("modal").style.display="none";
 }
+
+// ANIMACIÓN SOLUCIONES
+window.addEventListener("scroll",()=>{
+ const sec=document.getElementById("solutions");
+ if(sec.getBoundingClientRect().top < window.innerHeight - 100){
+  sec.classList.add("show");
+ }
+});
 </script>
 
 </body>
