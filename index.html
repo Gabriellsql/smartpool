@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartPool</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    position:relative;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    url('fondo2.jpg');
+
+    background-size:cover;
+    background-position:center;
+}
+
+/* TITULO */
+.title{
+    font-size:3rem;
+    max-width:800px;
+}
+
+/* LETRAS */
+.title span{
+    opacity:0;
+    display:inline-block;
+    transform:translateY(20px);
+    animation:fadeUp 0.5s forwards;
+}
+
+/* SUBTITULO */
+.subtitle{
+    margin-top:20px;
+    font-size:1.2rem;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp 1s forwards;
+    animation-delay:2s;
+}
+
+/* MOCKUP */
+.phone{
+    width:220px;
+    margin-top:40px;
+    opacity:0;
+    transform:translateY(50px);
+    animation:fadeUp 1s forwards;
+    animation-delay:3s;
+}
+
+/* SECCIÓN SIGUIENTE */
+.next{
+    height:100vh;
+    background:#f4f8fb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:2rem;
+    color:#0a2540;
+}
+
+/* ANIMACIONES */
+@keyframes fadeUp{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+
+<h1 class="title" id="texto"></h1>
+
+<p class="subtitle">
+Monitorea pH y cloro en tiempo real desde tu celular
+</p>
+
+<!-- CAMBIA ESTA IMAGEN POR TU APP -->
+<img class="phone" src="https://i.imgur.com/2yaf2wb.png">
+
+</section>
+
+<section class="next">
+Tu piscina nunca volverá a ser la misma 💧
+</section>
+
+<script>
+// TEXTO PRINCIPAL
+const mensaje = "Tu  alberca, siempre  perfecta";
+const contenedor = document.getElementById("texto");
+
+mensaje.split("").forEach((letra, i) => {
+    const span = document.createElement("span");
+    span.textContent = letra;
+    span.style.animationDelay = (i * 0.08) + "s";
+    contenedor.appendChild(span);
+});
+</script>
+
+</body>
+</html>
